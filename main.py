@@ -8,7 +8,6 @@
 import requests
 import os
 import re
-from bs4 import BeautifulSoup
 import urllib.request
 import m3u8
 from Crypto.Cipher import AES
@@ -16,12 +15,21 @@ from config import headers
 from crawler import prepareCrawl
 from merge import mergeMp4
 from delete import deleteM3u8, deleteMp4
-
+import time
+import cloudscraper
+from args import *
 # In[2]:
 
+parser = get_parser()
+args = parser.parse_args()
 
-# Jable網址
-url = input('輸入jable網址:')
+if(len(args.url) != 0):
+    url = args.url
+elif(args.random == True):
+    url = av_recommand()
+else:
+    # 使用者輸入Jable網址
+    url = input('輸入jable網址:')
 
 # In[3]:
 
@@ -32,19 +40,11 @@ dirName = urlSplit[-2]
 if not os.path.exists(dirName):
     os.makedirs(dirName)
 folderPath = os.path.join(os.getcwd(), dirName)
-
-
 # In[4]:
 
 
 # 得到 m3u8 網址
-# htmlfile = requests.get(url)
-# soup = BeautifulSoup(htmlfile.text, 'lxml')
-# needScript = str(soup.find_all('script')[7])
-# m3u8url = needScript.split('var hlsUrl = ')[1].split(';')[0]
-# m3u8url = m3u8url[1:][:-1]
-
-htmlfile = requests.get(url)
+htmlfile = cloudscraper.create_scraper(browser='firefox', delay=10).get(url)
 result = re.search("https://.+m3u8", htmlfile.text)
 m3u8url = result[0]
 

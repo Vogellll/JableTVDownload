@@ -6,6 +6,12 @@
 
 直接下載到電腦看沒煩惱
 
+### vitual env
+```
+python3 -m venv jable
+source jable/bin/activate. # MacOS
+```
+
 ### requirements
 `pip install -r requirements.txt`
 
@@ -24,6 +30,8 @@
 ### 完成(Finish)
 ![image](https://github.com/hcjohn463/JableDownload/blob/main/img/3.PNG)
 
+如果覺得好用 再麻煩給個星星好評 謝謝!!
+
 ## #####選擇性使用(Optional use)#####
 
 ### 使用FFmpeg轉檔優化 : 參數能自己調(Use FFmpeg encode) 
@@ -37,6 +45,20 @@
 
 [FFmpeg]:<https://www.ffmpeg.org/>  
 
+### Argument parser
+`$python main.py -h`
+
+![](https://i.imgur.com/qgyS5sf.png)
+
+`$python main.py --random True`
+
+可以直接下載隨機熱門影片
+
+![](https://i.imgur.com/dSsdB7Y.png)
+
+可以直接在cmd line指定url。
+
+![](https://i.imgur.com/DKFrD7T.png)
 
 ### 更新日誌(Update log)
 
